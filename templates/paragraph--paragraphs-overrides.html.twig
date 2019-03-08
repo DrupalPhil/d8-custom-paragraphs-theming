@@ -1,0 +1,9 @@
+<div class="fallback-component col-12">
+    <p>If you see this, you're missing a template and I'm the fallback.</p>
+    <ol>
+        <li>Add a directory called: <i>{module}/src/paragraphs/</i><strong>{{ paragraph.bundle() | replace({'_':'-'}) }}</strong></li>
+        <li>Add a template in that directory called:
+            <strong>paragraph--paragraphs-overrides--{{ paragraph.bundle() | replace({'_':'-'}) }}.html.twig</strong>
+        </li>
+    </ol>
+</div>

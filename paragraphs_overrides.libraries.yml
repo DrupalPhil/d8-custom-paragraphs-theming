@@ -1,0 +1,46 @@
+
+paragraph-swiper:
+  js:
+    src/paragraphs/swiper/swiper-paragraph-init.js: {}
+
+paragraph-careers-grid:
+  js:
+    src/paragraphs/careers-grid/built-for-teams-feed.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal
+
+paragraph-facebook-feed:
+  js:
+    src/paragraphs/facebook-feed/facebook-pull.js: {}
+  dependencies:
+    - paragraphs_overrides/imagesloaded
+    - paragraphs_overrides/masonry
+    - paragraphs_overrides/momentjs
+
+momentjs:
+  js:
+    /libraries/momentjs/moment.js: {}
+
+masonry:
+  js:
+    /libraries/masonry/masonry.min.js: {}
+
+imagesloaded:
+  js:
+    /libraries/imagesloaded/imagesloaded.min.js: {}
+
+google-maps:
+  js:
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyAImx1HY7XD1KdYJFdUoi-PEbWS2Db6YYM: { type: external, minified: true }
+
+
+paragraph-google-map:
+  js:
+    src/paragraphs/contact-us-maps/paragraph-contact-us-maps.js: {}
+  dependencies:
+    - paragraphs_overrides/google-maps
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal

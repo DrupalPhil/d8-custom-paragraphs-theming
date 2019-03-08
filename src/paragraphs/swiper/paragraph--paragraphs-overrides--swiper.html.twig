@@ -1,0 +1,46 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{#{{ kint(content|keys) }}#}
+{#{{ kint(content.field_priority|keys) }}#}
+{#{{ kint(content.field_layout_classes) }}#}
+{#{{ kint(content.field_layout_classes.entity) }}#}
+
+{{ attach_library('classybs4/swiper') }}
+{{ attach_library('paragraphs_overrides/paragraph-swiper') }}
+
+{% set layout = content.field_layout_classes['#items'].value %}
+{% set cstmClasses = [layout]|merge(['swiper-container']) %}
+
+
+
+<div{{ attributes.addClass(cstmClasses) }}>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        {% for key, item in content.field_images['#items'] %}
+            {#{{ kint(item|keys) }}#}
+            {#{{ kint(item.height) }}#}
+
+            {% set src = item.entity.uri.value | image_style('large') %}
+
+            <!-- Slides -->
+            <img class="swiper-slide"
+                 src="{{ src }}"
+                 alt=""
+                 height="{{ item.height }}"
+                 width="{{ item.width }}">
+
+        {% endfor %}
+    </div>
+
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+</div>

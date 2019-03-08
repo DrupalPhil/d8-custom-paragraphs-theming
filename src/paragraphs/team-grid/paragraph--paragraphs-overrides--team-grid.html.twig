@@ -1,0 +1,127 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{% set results = drupal_view_result('culture_team_grid', 'default') %}
+
+<div class="container">
+    <div id="teamGrid" class="row">
+
+        {% for key, row in results %}
+
+            {% set gridImgUri = row._entity.fields.field_grid_photo.entity.uri.value %}
+            {% set gridImgSrc = gridImgUri | image_style('large') %}
+            {% set imgDir = '/modules/custom/paragraphs_overrides/src/paragraphs/team-grid/inline-imgs/' %}
+
+            {% set gridItem %}
+                <div class="grid-item col-12 col-md-3"
+                     data-toggle="modal"
+                     data-target="#bioItem-{{ key }}">
+                    <div class="grid-item-inside tm"
+                         style="background-image: url({{ gridImgSrc }})">
+                    </div>
+                </div>
+            {% endset %}
+
+            {% if key == 1 %}
+
+                {# BPD Basics img #}
+                <div class="grid-item col-12 col-md-3"
+                     data-toggle="modal"
+                     data-target="#bpdBasics">
+                    <div class="grid-item-inside img"
+                         style="background-image: url({{ imgDir ~ 'img1.png' }});
+                                 background-color: #232021;">
+                    </div>
+                </div>
+
+                {{ gridItem | raw }}
+
+            {% elseif key == 2 %}
+
+                {# This could be you #}
+                <div class="grid-item col-12 col-md-3">
+                    <div class="grid-item-inside img"
+                         style="background-image: url({{ imgDir ~ 'img2.png' }});
+                                 background-color: #fff;">
+                    </div>
+                </div>
+
+                {{ gridItem | raw }}
+
+
+            {% elseif key == 3 %}
+
+                {# link #}
+                <div class="grid-item col-12 col-md-3">
+                    <div class="grid-item-inside img"
+                         style="background-image: url({{ imgDir ~ 'img3.png' }});
+                                 background-color: #fff;">
+                    </div>
+                </div>
+
+                {{ gridItem | raw }}
+
+            {% else %}
+                {{ gridItem | raw }}
+            {% endif %}
+
+
+
+            {% set popupImgUri = row._entity.fields.field_popup_photo.entity.uri.value %}
+            {% set popupImgSrc = popupImgUri | image_style('large') %}
+            {% set bio = row._entity.fields.field_bio_copy.value %}
+
+            <div class="modal fade"
+                 id="bioItem-{{ key }}"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <img class="card-img-top" src="{{ popupImgSrc }}" alt="">
+                        <div class="modal-body">
+                            {{ bio | raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade"
+                 id="bpdBasics"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img class="basics-lockup" src="{{ imgDir ~ 'basics-top.png' }}" alt="">
+                            <div class="basics">
+                                <div><span>B</span>PDERRRS COME FIRST</div>
+                                <div><span>A</span>+NESS ALWAYS</div>
+                                <div><span>S</span>HOW UP</div>
+                                <div><span>I</span>NSPIRE FUN</div>
+                                <div><span>C</span>ARE FOR EACH OTHER</div>
+                                <div><span>S</span>TAND BY YOUR WORD</div>
+                            </div>
+                            <div class="basics-copy">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In volutpat elementum orci in rhoncus. Duis ut elit orci. Ut posuere lacus a consectetur consectetur. Curabitur a dapibus erat. Maecenas cursus nisl sit amet felis efficitur tristique. Suspendisse dictum lacinia nibh, at accumsan quam commodo id. Quisque ac hendrerit purus. Nulla odio velit, iaculis eu rutrum eget, cursus id dui. Aliquam maximus augue ac leo dictum suscipit et non felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam interdum quam id ex dapibus porta.</p>
+                                <p>Praesent mi sem, consequat vel tincidunt sed, dignissim quis ipsum. Suspendisse vel molestie turpis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed condimentum leo maximus velit luctus, vel varius nulla molestie. Cras bibendum nibh risus. Aliquam pharetra mattis pulvinar. Sed et sapien ante.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+</div>

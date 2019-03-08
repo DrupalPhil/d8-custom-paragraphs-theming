@@ -1,0 +1,5 @@
+name: 'Paragraphs Overrides'
+type: module
+description: 'Paragraphs Overrides'
+core: 8.x
+package: 'Custom'

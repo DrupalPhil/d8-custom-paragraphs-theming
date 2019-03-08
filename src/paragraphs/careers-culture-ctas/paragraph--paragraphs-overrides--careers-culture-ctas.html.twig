@@ -1,0 +1,38 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+
+{% set imgDir = '/modules/custom/paragraphs_overrides/src/paragraphs/careers-culture-ctas/inline-imgs/' %}
+
+<div class="container">
+    <div id="ctaBlocks" class="row">
+        <div class="col-12 col-sm-6 col-lg-3 cta-block img-block"
+             style="background-image: url({{ imgDir ~ 'careers.jpg' }});">
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 cta-block join-us">
+            <div class="inside">
+                <img src="{{ imgDir ~ 'join-us.png' }}" alt="">
+                <p>We are always looking for new talent and character!</p>
+                <a href="#">See Current Openings</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 cta-block basics">
+            <div class="inside">
+                <img src="{{ imgDir ~ 'basics.png' }}" alt="">
+                <p>We are always looking for new talent and character!</p>
+                <a href="#">Meet the Team</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 cta-block img-block"
+             style="background-image: url({{ imgDir ~ 'culture.jpg' }});">
+        </div>
+    </div>
+</div>

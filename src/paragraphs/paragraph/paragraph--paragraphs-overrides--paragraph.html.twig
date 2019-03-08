@@ -1,0 +1,70 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{#{{ kint(_context|keys) }}#}
+{#{{ kint(content|keys) }}#}
+{#{{ kint(content.field_columns) }}#}
+{#{{ kint(content.field_checkbox) }}#}
+
+{#
+ * Add 'sidebar' class and modify column width
+#}
+{#{% set classes = create_attribute() %}#}
+{#{% set sidebarBool = content.field_bs_sidebar['0']['#markup'] %}#}
+{#{% if sidebarBool == "1" %}#}
+    {#{% set classes = classes|merge(["col-12","col-md-8","col-lg-4","offset-sm-1","offset-lg-0","sidebar"]) %}#}
+{#{% else %}#}
+    {#{% set classes = classes|merge(["col-12","col-md-8","col-lg-7","offset-sm-1"]) %}#}
+{#{% endif %}#}
+
+{# TODO: If bgColor, change opacity of text #}
+{#<div{{ attributes.addClass(classes) }}>#}
+{#<div class="col-12">#}
+    {#<div class="row">#}
+        {% for key, item in content.field_paragraph_body['#items'] %}
+            {% if item.entity.field_paragraph_body %}
+
+                {% set layout = item.entity.field_layout.entity.field_layout_classes.value %}
+                {% set bgColor = item.entity.field_background_color.color %}
+                {% set bgOpacity = item.entity.field_background_color.opacity %}
+
+
+                {% if (bgColor == '#ffffff') or (bgColor == NULL) %}
+                    {% set inlineStyles = [
+                        'height: 100%;',
+                        'align-items: center;',
+                        'padding: 10%;'
+                    ] %}
+                {% else %}
+                    {% set inlineStyles = [
+                        'height: 100%;',
+                        'align-items: center;',
+                        'padding: 10%;',
+                        'opacity: 0.8;'
+                    ] %}
+                {% endif %}
+
+                <div {{ attributes.addClass(layout) }}
+                        style="background-color: {{ bgColor }}">
+
+                    <div class="row" {{ attributes.setAttribute('style', inlineStyles) }}>
+                        <div class="col-12">
+                            {{ item.entity.field_paragraph_body.value | raw }}
+                        </div>
+                    </div>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+    {#</div>#}
+{#</div>#}

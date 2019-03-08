@@ -1,0 +1,54 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{% set results = drupal_view_result('portfolio_grid', 'default') %}
+
+<div class="container">
+    <div class="portfolio-grid row">
+        {% for key, row in results %}
+
+            {#{{ kint(row) }}#}
+            {#{{ kint(row._entity) }}#}
+            {% set path = 'node/' ~ row.nid %}
+            {% set description = row._entity.fields.field_summary_description.value %}
+            {% set logoUri = row._entity.fields.field_summary_logo.entity.uri.value %}
+            {% set logoSrc = logoUri | image_style('medium') %}
+            {% set bgUri = row._entity.fields.field_summary_image.entity.uri.value %}
+            {% set bgSrc = bgUri | image_style('large') %}
+            {#{{ kint(logoUri) }}#}
+
+            <a href="{{ drupal_url(path) }}"
+               class="grid-item col-12 col-md-4"
+               style="background-image: url({{ bgSrc }})">
+
+                <div class="overlay"></div>
+
+                <div class="row-content">
+                    {#<div class="start">#}
+                        <div class="logo">
+                            <img src="{{ logoSrc }}" alt="">
+                        </div>
+                    {#</div>#}
+                    <div class="end">
+                        <div class="description">
+                            {{ description }}
+                        </div>
+                        <div class="link">
+                            view project
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
+        {% endfor %}
+    </div>
+</div>

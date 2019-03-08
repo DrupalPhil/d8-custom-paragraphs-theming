@@ -1,0 +1,42 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{#{{ kint(content|keys) }}#}
+{#{{ kint(content.field_priority|keys) }}#}
+{#{{ kint(content.field_layout_classes) }}#}
+{#{{ kint(content.field_layout_classes.entity) }}#}
+
+
+
+{% for key, item in content.field_image['#items'] %}
+    {#{{ kint(item|keys) }}#}
+
+    {% set priority = content.field_priority['#items'][key].value %}
+    {% set layout = content.field_layout_classes['#items'][key].value %}
+    {% set src = item.entity.uri.value | image_style('large') %}
+
+    {% if priority == 'container' %}
+        <div class="{{ layout }}"
+             style="background-image: url('{{ src }}');
+                     background-size: cover;
+                     background-position: 50% 50%;
+                     min-height: 350px;">
+        </div>
+    {% else %}
+        <div class="{{ layout }}"
+             style="padding-left: 0; padding-right: 0;">
+            <img class="img-fluid" src="{{ src }}" alt=""
+                 style="width: 100%">
+        </div>
+    {% endif %}
+
+
+{% endfor %}

@@ -1,0 +1,122 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+
+{% set health %}
+    <h3>Health Benefits</h3>
+    <p>Top Notch Benefits including</p>
+    <ul>
+        <li>Medical</li>
+        <li>Dental</li>
+        <li>Vision</li>
+        <li>Life</li>
+        <li>Short Term Disability Insurance</li>
+        <li>Subsidized gym membership</li>
+    </ul>
+{% endset %}
+
+{% set financial %}
+    <h3>financial Benefits</h3>
+    <p>Top Notch Benefits including</p>
+    <ul>
+        <li>Medical</li>
+        <li>Dental</li>
+        <li>Vision</li>
+        <li>Life</li>
+        <li>Short Term Disability Insurance</li>
+        <li>Subsidized gym membership</li>
+    </ul>
+{% endset %}
+
+{% set career %}
+    <h3>career Benefits</h3>
+    <p>Top Notch Benefits including</p>
+    <ul>
+        <li>Medical</li>
+        <li>Dental</li>
+        <li>Vision</li>
+        <li>Life</li>
+        <li>Short Term Disability Insurance</li>
+        <li>Subsidized gym membership</li>
+    </ul>
+{% endset %}
+
+{% set community %}
+    <h3>community Benefits</h3>
+    <p>Top Notch Benefits including</p>
+    <ul>
+        <li>Medical</li>
+        <li>Dental</li>
+        <li>Vision</li>
+        <li>Life</li>
+        <li>Short Term Disability Insurance</li>
+        <li>Subsidized gym membership</li>
+    </ul>
+{% endset %}
+
+
+{% set data = {
+    0: {
+        img: 'health.jpg',
+        heading: 'health benefits',
+        benefits: health,
+    },
+    1: {
+        img: 'financial.jpg',
+        heading: 'financial benefits',
+        benefits: financial,
+    },
+    2: {
+        img: 'career.jpg',
+        heading: 'career benefits',
+        benefits: career,
+    },
+    3: {
+        img: 'community.jpg',
+        heading: 'community',
+        benefits: community,
+    },
+} %}
+
+{% set imgDir = '/modules/custom/paragraphs_overrides/src/paragraphs/benefits-grid/inline-imgs/' %}
+
+<div class="container">
+    <div id="benefitsGrid" class="row">
+
+        {% for key, item in data %}
+
+            <div class="benefits-grid-item col-12 col-sm-6"
+                 data-toggle="modal"
+                 data-target="#benefitsItem-{{ key }}">
+                <div class="bg-img"
+                     style="background-image: url({{ imgDir ~ item.img }});">
+                </div>
+                <div class="heading">{{ item.heading }}</div>
+            </div>
+
+            <div class="modal fade"
+                 id="benefitsItem-{{ key }}"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            {{ item.benefits }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+</div>

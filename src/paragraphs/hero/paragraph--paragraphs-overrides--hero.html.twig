@@ -1,0 +1,67 @@
+
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{#{{ kint(content|keys) }}#}
+
+{% set bgImg = content.field_bg_img['#items'].entity.uri.value | image_style('background_image') %}
+{% set heroImg = content.field_hero_image['#items'].entity.uri.value | image_style('medium') %}
+{% set heading = content.field_heading['#items'].value %}
+{% set summary = content.field_summary['#items'].value %}
+{% set inverse = content.field_inverse['#items'].value %}
+
+{% set containerClasses = create_attribute() %}
+{% set containerClasses = containerClasses|merge([
+    'paragraph-hero',
+    'container-fluid'
+]) %}
+
+
+{% if inverse == "1" %}
+    {% set containerClasses = containerClasses|merge([
+        'inverse'
+    ]) %}
+{% endif %}
+
+
+<div{{ attributes.addClass(containerClasses) }}
+     style="background-image: url('{{ bgImg }}');">
+    <div class="row" style="height: 100%;">
+
+        <div class="container">
+            <div class="row" style="height: 100%; align-content: space-between;">
+                <div class="col-12">
+
+                    {% if heroImg %}
+                        <img class="hero-image img-fluid"
+                             src="{{ heroImg }}"
+                             alt="">
+                    {% endif %}
+
+                    {% if heading %}
+                        <h1>{{ heading }}</h1>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12 col-md-8 offset-md-2">
+
+                    {% if summary %}
+                        <div class="summary">
+                            {{ summary | raw }}
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

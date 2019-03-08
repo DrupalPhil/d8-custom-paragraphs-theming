@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Base template
+ *
+ * Available variables:
+ *
+ */
+#}
+
+{#{{ kint(content.field_wistia_id|keys) }}#}
+
+{% set layout = content.field_layout_classes['#items'].value %}
+
+{% for key, item in content.field_wistia_id['#items'] %}
+    <div class="{{ layout }}"
+         style="padding: 0;">
+        {% set wistiaId = item.value %}
+
+        <script src="https://fast.wistia.com/embed/medias/{{ wistiaId }}.jsonp" async></script>
+        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+        <div class="" style="min-height: 350px;">
+            <div style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                <span class="wistia_embed wistia_async_{{ wistiaId }} popover=true popoverAnimateThumbnail=true videoFoam=true"
+                      style="display:inline-block;height:100%;position:relative;width:100%">&nbsp;</span>
+            </div>
+        </div>
+    </div>
+{% endfor %}
